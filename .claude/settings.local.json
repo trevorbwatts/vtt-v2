@@ -1,0 +1,28 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm info:*)",
+      "Bash(npm create:*)",
+      "Bash(printf \"vtt-v2\\\\n\")",
+      "Bash(printf \"y\\\\nvtt-v2\\\\n\")",
+      "Bash(npm install:*)",
+      "Bash(npx tsc:*)",
+      "Bash(npm run:*)",
+      "Bash(curl -s --head \"https://raw.githubusercontent.com/5etools-mirror-3/5etools-src/main/data/bestiary/bestiary-a.json\")",
+      "Bash(curl -s --head \"https://raw.githubusercontent.com/5etools-mirror-2/5etools-mirror-2.github.io/master/data/bestiary/bestiary-a.json\")",
+      "Bash(curl -s --head \"https://raw.githubusercontent.com/5e-bits/5e-database/main/src/monsters/monsters.json\")",
+      "Bash(curl -s \"https://api.github.com/repos/5etools-mirror-1/5etools-mirror-1.github.io/contents/data/bestiary\")",
+      "Bash(curl -s --head \"https://5e.tools/data/bestiary/bestiary-a.json\")",
+      "Bash(curl -s \"https://api.open5e.com/v2/monsters/?limit=1\")",
+      "Bash(curl -s \"https://api.open5e.com/v2/monsters/?limit=2&format=json\" -H \"Accept: application/json\")",
+      "Bash(python3 -c \"import sys,json; d=json.load\\(sys.stdin\\); print\\(list\\(d.keys\\(\\)\\)\\); print\\(d[''''count'''']\\)\")",
+      "Bash(curl -s \"https://api.open5e.com/v2/monsters/?limit=2\" -H \"Accept: application/json\" -o /tmp/open5e_test.json)",
+      "Bash(python3 -c \"import json; d=json.load\\(open\\(''/tmp/open5e_test.json''\\)\\); print\\(list\\(d.keys\\(\\)\\)\\); print\\(''count:'', d.get\\(''count'', ''N/A''\\)\\)\")",
+      "Bash(curl -s \"https://api.open5e.com/v2/monsters/?limit=2\" -H \"Accept: application/json\" -o \"$TEMP/open5e_test.json\")",
+      "Bash(python3 -c \"import json; d=json.load\\(open\\(''$TEMP/open5e_test.json''\\)\\); print\\(list\\(d.keys\\(\\)\\)\\); print\\(''count:'', d.get\\(''count'', ''N/A''\\)\\)\")",
+      "Bash(curl -s \"https://api.open5e.com/v2/monsters/?limit=2\" -H \"Accept: application/json\")",
+      "Bash(node -e \"let d=''''''''; process.stdin.on\\(''''data'''',c=>d+=c\\); process.stdin.on\\(''''end'''',\\(\\)=>{try{const j=JSON.parse\\(d\\);console.log\\(Object.keys\\(j\\),j.count\\);}catch\\(e\\){console.log\\(''''parse error''''\\);}}\\)\")",
+      "Bash(node scripts/download-bestiary.mjs)"
+    ]
+  }
+}
