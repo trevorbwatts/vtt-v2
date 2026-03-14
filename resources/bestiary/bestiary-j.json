@@ -1,0 +1,1631 @@
+{
+  "monster": [
+    {
+      "name": "Jaanavar Jal",
+      "source": "CC",
+      "size": [
+        "H"
+      ],
+      "type": "Monstrosity",
+      "ac": [
+        {
+          "ac": 15,
+          "from": [
+            "natural armor"
+          ]
+        }
+      ],
+      "hp": {
+        "average": 172,
+        "formula": "15d12+75"
+      },
+      "speed": {
+        "swim": 60,
+        "walk": 20
+      },
+      "str": 20,
+      "dex": 14,
+      "con": 20,
+      "int": 6,
+      "wis": 13,
+      "cha": 10,
+      "cr": "7",
+      "senses": [
+        "blindsense 60 ft., passive Perception 14"
+      ],
+      "languages": [
+        "-"
+      ],
+      "passive": 4,
+      "trait": [
+        {
+          "name": "Amphibious",
+          "entries": [
+            "The jaanavar jal can breathe air and water."
+          ]
+        },
+        {
+          "name": "Regeneration",
+          "entries": [
+            "The jaanavar jal regains 10 hp at the start of its turn if it has at least 1 hp. If the jaanavar jal takes cold damage, this trait doesn't function at the start of its next turn. The jaanavar jal dies only if it starts its turn with 0 hp and doesn't regenerate."
+          ]
+        }
+      ],
+      "action": [
+        {
+          "name": "Multiattack",
+          "entries": [
+            "The jaanavar jal makes two attacks: one with its bite and one to constrict."
+          ]
+        },
+        {
+          "name": "Bite",
+          "entries": [
+            "Melee Weapon Attack: +8 to hit, reach 10 ft., one target. Hit: 21 (3d10 + 5) piercing damage"
+          ]
+        },
+        {
+          "name": "Constrict",
+          "entries": [
+            "Melee Weapon Attack: +8 to hit, reach 5 ft., one Large or smaller creature. Hit: 10 (1d10 + 5) bludgeoning damage and the target is grappled (escape DC 16). Until this grapple ends, the creature is restrained and the jaanavar jal can't constrict another creature."
+          ]
+        },
+        {
+          "name": "Flaming Oil Spittle (Recharge 5-6)",
+          "entries": [
+            "The jaanavar jal expels a line of burning oil that is 40 feet long and 5 feet wide from glands beside its mouth. Each creature in that line must make a DC 16 Dexterity saving throw, taking 31 (9d6) fire damage on a failed save, or half as much damage on a successful one."
+          ]
+        }
+      ],
+      "legendaryHeader": []
+    },
+    {
+      "name": "Jack of Strings",
+      "source": "TOB2",
+      "size": [
+        "M"
+      ],
+      "type": "Fey",
+      "ac": [
+        {
+          "ac": 14,
+          "from": []
+        }
+      ],
+      "hp": {
+        "average": 90,
+        "formula": "12d8+36"
+      },
+      "speed": {
+        "walk": 30
+      },
+      "str": 14,
+      "dex": 19,
+      "con": 17,
+      "int": 15,
+      "wis": 14,
+      "cha": 20,
+      "cr": "5",
+      "senses": [
+        "darkvision 60 ft., passive Perception 12"
+      ],
+      "languages": [
+        "Common, Sylvan, Umbral"
+      ],
+      "passive": 10,
+      "trait": [
+        {
+          "name": "Magic Resistance",
+          "entries": [
+            "The jack of strings has advantage on saving throws against spells and other magical effects."
+          ]
+        }
+      ],
+      "action": [
+        {
+          "name": "Multiattack",
+          "entries": [
+            "The jack of strings makes two mocking slap attacks."
+          ]
+        },
+        {
+          "name": "Mocking Slap",
+          "entries": [
+            "Melee Weapon Attack: +7 to hit, reach 5 ft., one target. Hit: 10 (2d6 + 3) bludgeoning damage plus 3 (1d6) psychic damage."
+          ]
+        },
+        {
+          "name": "Animate Puppet",
+          "entries": [
+            "The jack of strings animates up to three wooden puppets it can see within 60 feet of it. This works like the animate objects spell, except the wooden puppet uses the statistics of a Small object, regardless of the puppet's actual size. The jack can have no more than five puppets animated at one time."
+          ]
+        },
+        {
+          "name": "Puppet Link",
+          "entries": [
+            "One humanoid or beast the jack of strings can see within 60 feet of it must succeed on a DC 15 Wisdom saving throw or become magically linked to the jack's marionette. This link appears as a barely perceptible string between the jack's marionette and the target. A linked creature can repeat the saving throw at the end of each of its turns, ending the link on a success.\n\nWhile a target is linked, the jack of strings can use its reaction at the start of the target's turn to control the linked target. The jack of strings can make the target move, manipulate objects, attack, or take other purely physical actions. The jack can't make the target cast spells. While controlled, the target moves awkwardly and has disadvantage on attack rolls and ability checks. If the target receives a suicidal command from the jack of strings, it can repeat the saving throw, ending the effect on a success.\n\nThe jack of strings can have only one target linked at a time. If it links another, the effect on the previous target ends. If a creature dies while linked to the jack's marionette, the creature's body becomes a wooden puppet that resembles the creature."
+          ]
+        }
+      ],
+      "legendaryHeader": []
+    },
+    {
+      "name": "Jackal",
+      "source": "WOTC-SRD",
+      "size": [
+        "S"
+      ],
+      "type": "Beast",
+      "ac": [
+        {
+          "ac": 12,
+          "from": []
+        }
+      ],
+      "hp": {
+        "average": 3,
+        "formula": "1d6"
+      },
+      "speed": {
+        "walk": 40
+      },
+      "str": 8,
+      "dex": 15,
+      "con": 11,
+      "int": 3,
+      "wis": 12,
+      "cha": 6,
+      "cr": "0",
+      "senses": [
+        "passive Perception 13"
+      ],
+      "languages": [],
+      "passive": 3,
+      "trait": [
+        {
+          "name": "Keen Hearing and Smell",
+          "entries": [
+            "The jackal has advantage on Wisdom (Perception) checks that rely on hearing or smell."
+          ]
+        },
+        {
+          "name": "Pack Tactics",
+          "entries": [
+            "The jackal has advantage on an attack roll against a creature if at least one of the jackal's allies is within 5 ft. of the creature and the ally isn't incapacitated."
+          ]
+        }
+      ],
+      "action": [
+        {
+          "name": "Bite",
+          "entries": [
+            "Melee Weapon Attack: +1 to hit, reach 5 ft., one target. Hit: 1 (1d4 - 1) piercing damage."
+          ]
+        }
+      ],
+      "legendaryHeader": []
+    },
+    {
+      "name": "Jackal",
+      "source": "MENAGERIE",
+      "size": [
+        "S"
+      ],
+      "type": "Beast",
+      "ac": [
+        {
+          "ac": 12,
+          "from": []
+        }
+      ],
+      "hp": {
+        "average": 3,
+        "formula": "1d6"
+      },
+      "speed": {
+        "walk": 40
+      },
+      "str": 8,
+      "dex": 14,
+      "con": 10,
+      "int": 2,
+      "wis": 12,
+      "cha": 4,
+      "cr": "0",
+      "senses": [
+        "passive Perception 13"
+      ],
+      "languages": [],
+      "passive": 10,
+      "trait": [
+        {
+          "name": "Keen Hearing and Smell",
+          "entries": [
+            "The jackal has advantage on Perception checks that rely on hearing and smell."
+          ]
+        }
+      ],
+      "action": [
+        {
+          "name": "Bite",
+          "entries": [
+            "Melee Weapon Attack: +2 to hit, reach 5 ft., one target. Hit: 1 piercing damage."
+          ]
+        }
+      ],
+      "legendaryHeader": []
+    },
+    {
+      "name": "Jackal",
+      "source": "BLACKFLAG",
+      "size": [
+        "S"
+      ],
+      "type": "Beast",
+      "ac": [
+        {
+          "ac": 11,
+          "from": []
+        }
+      ],
+      "hp": {
+        "average": 8,
+        "formula": ""
+      },
+      "speed": {
+        "walk": 40
+      },
+      "str": 8,
+      "dex": 12,
+      "con": 10,
+      "int": 2,
+      "wis": 12,
+      "cha": 6,
+      "cr": "0",
+      "senses": [
+        "-"
+      ],
+      "languages": [
+        "-"
+      ],
+      "passive": 13,
+      "trait": [
+        {
+          "name": "Heightened Hearing and Smell",
+          "entries": [
+            "The jackal's Perception is 18 when perceiving by hearing or smell."
+          ]
+        },
+        {
+          "name": "Pack Tactics",
+          "entries": [
+            "The jackal has advantage on attack rolls against a creature if at least one of the jackal's allies is within 5 feet of the creature and the ally isn't incapacitated."
+          ]
+        }
+      ],
+      "action": [
+        {
+          "name": "Bite",
+          "entries": [
+            "_Melee Weapon Attack:_ +3 to hit, reach 5 ft., one creature. _Hit:_ 3 (1d4+1) piercing damage, and the target must succeed on a DC 10 CON save or contract shriveling fever disease, named for the way the disease causes an infected creature's muscles to shrivel. Until the disease is cured, the creature is poisoned, and at the end of each long rest, the infected creature must succeed on a DC 10 CON save or its STR score is reduced by 1d4. This reduction lasts until the creature finishes a long rest after the disease is cured. If the disease reduces the creature's STR to 0, the creature dies. A creature that succeeds on two saves recovers from the disease."
+          ]
+        }
+      ],
+      "reaction": [],
+      "legendary": [],
+      "legendaryHeader": []
+    },
+    {
+      "name": "Jackalope",
+      "source": "MENAGERIE",
+      "size": [
+        "T"
+      ],
+      "type": "Beast",
+      "ac": [
+        {
+          "ac": 14,
+          "from": []
+        }
+      ],
+      "hp": {
+        "average": 55,
+        "formula": "10d4+30"
+      },
+      "speed": {
+        "walk": 50
+      },
+      "str": 11,
+      "dex": 19,
+      "con": 16,
+      "int": 6,
+      "wis": 17,
+      "cha": 14,
+      "cr": "3",
+      "senses": [
+        "passive Perception 17"
+      ],
+      "languages": [
+        "understands Common but cannot speak"
+      ],
+      "passive": 10,
+      "trait": [
+        {
+          "name": "Evasion",
+          "entries": [
+            "If the jackalope is subjected to an effect that allows it to make a Dexterity saving throw to take only half damage, the jackalope instead takes no damage if it succeeds on the saving throw, and only half damage if it fails."
+          ]
+        },
+        {
+          "name": "Keen Hearing",
+          "entries": [
+            "The jackalope has advantage on Perception checks that rely on hearing."
+          ]
+        },
+        {
+          "name": "Mimicry",
+          "entries": [
+            "The jackalope can imitate sounds it hears frequently, such as a simple phrase or an animal noise. Recognizing the sounds as imitation requires a DC 14 Insight check."
+          ]
+        }
+      ],
+      "action": [
+        {
+          "name": "Gore",
+          "entries": [
+            "Melee Weapon Attack: +6 to hit, reach 5 ft., one target. Hit: 8 (1d8+4) piercing damage. If the jackalope moves at least 20 feet straight towards the target before the attack  the attack deals an extra 7 (2d6) piercing damage."
+          ]
+        }
+      ],
+      "reaction": [
+        {
+          "name": "Uncanny Dodge",
+          "entries": [
+            "When an attacker the jackalope can see hits it with an attack, the jackalope halves the attacks damage against it."
+          ]
+        }
+      ],
+      "legendaryHeader": []
+    },
+    {
+      "name": "Jackalwere",
+      "source": "MENAGERIE",
+      "size": [
+        "M"
+      ],
+      "type": "Fiend",
+      "ac": [
+        {
+          "ac": 12,
+          "from": []
+        }
+      ],
+      "hp": {
+        "average": 18,
+        "formula": "4d8"
+      },
+      "speed": {
+        "walk": 40
+      },
+      "str": 10,
+      "dex": 14,
+      "con": 10,
+      "int": 12,
+      "wis": 10,
+      "cha": 14,
+      "cr": "1/2",
+      "senses": [
+        "darkvision 60 ft., passive Perception 12"
+      ],
+      "languages": [
+        "Common (cant speak in jackal form)"
+      ],
+      "passive": 10,
+      "trait": [
+        {
+          "name": "Chaotic Evil",
+          "entries": [
+            "The jackalwere radiates a Chaotic and Evil aura."
+          ]
+        },
+        {
+          "name": "Keen Hearing and Smell",
+          "entries": [
+            "The jackalwere has advantage on Perception checks that rely on hearing and smell."
+          ]
+        },
+        {
+          "name": "Pack Tactics",
+          "entries": [
+            "The jackalwere has advantage on attack rolls against a creature if at least one of the jackalweres allies is within 5 feet of the creature and not incapacitated."
+          ]
+        },
+        {
+          "name": "Truth Aversion",
+          "entries": [
+            "The jackalwere must succeed on a DC 14 Wisdom saving throw to make a true statement. On a failure, it tells an unpremeditated lie."
+          ]
+        }
+      ],
+      "action": [
+        {
+          "name": "Bite (Jackal or Hybrid Form Only)",
+          "entries": [
+            "Melee Weapon Attack: +4 to hit, reach 5 ft., one target. Hit: 4 (1d4 + 2) piercing damage."
+          ]
+        },
+        {
+          "name": "Scimitar (Human or Hybrid Form Only)",
+          "entries": [
+            "Melee Weapon Attack: +4 to hit, reach 5 ft., one target. Hit: 5 (1d6 + 2) slashing damage."
+          ]
+        },
+        {
+          "name": "Sleep Gaze (Gaze, Hybrid Form Only)",
+          "entries": [
+            "One creature within 30 feet of the jackalwere makes a DC 10 Wisdom saving throw. On a failed save  the target is magically charmed. At the beginning of the jackalweres next turn  the target repeats the saving throw. On a success  the effect ends. On a failure  the creature falls unconscious for 10 minutes. Both the charmed and unconscious conditions end if the target takes damage or a creature within reach of the target uses an action to shake the target back to its senses. If the target successfully saves against Sleep Gaze  it is immune to Sleep Gaze for 24 hours. Undead and creatures immune to charm arent affected by it."
+          ]
+        }
+      ],
+      "legendaryHeader": []
+    },
+    {
+      "name": "Jackalwere Pack Leader",
+      "source": "MENAGERIE",
+      "size": [
+        "M"
+      ],
+      "type": "Fiend",
+      "ac": [
+        {
+          "ac": 12,
+          "from": []
+        }
+      ],
+      "hp": {
+        "average": 36,
+        "formula": "8d8"
+      },
+      "speed": {
+        "walk": 40
+      },
+      "str": 10,
+      "dex": 14,
+      "con": 10,
+      "int": 12,
+      "wis": 10,
+      "cha": 14,
+      "cr": "2",
+      "senses": [
+        "darkvision 60 ft., passive Perception 12"
+      ],
+      "languages": [
+        "Common (cant speak in jackal form)"
+      ],
+      "passive": 10,
+      "trait": [
+        {
+          "name": "Chaotic Evil",
+          "entries": [
+            "The jackalwere radiates a Chaotic and Evil aura."
+          ]
+        },
+        {
+          "name": "Keen Hearing and Smell",
+          "entries": [
+            "The jackalwere has advantage on Perception checks that rely on hearing and smell."
+          ]
+        },
+        {
+          "name": "Pack Tactics",
+          "entries": [
+            "The jackalwere has advantage on attack rolls against a creature if at least one of the jackalweres allies is within 5 feet of the creature and not incapacitated."
+          ]
+        },
+        {
+          "name": "Truth Aversion",
+          "entries": [
+            "The jackalwere must succeed on a DC 14 Wisdom saving throw to make a true statement. On a failure, it tells an unpremeditated lie."
+          ]
+        }
+      ],
+      "action": [
+        {
+          "name": "Bite (Jackal or Hybrid Form Only)",
+          "entries": [
+            "Melee Weapon Attack: +4 to hit, reach 5 ft., one target. Hit: 4 (1d4 + 2) piercing damage."
+          ]
+        },
+        {
+          "name": "Scimitar (Human or Hybrid Form Only)",
+          "entries": [
+            "Melee Weapon Attack: +4 to hit, reach 5 ft., one target. Hit: 5 (1d6 + 2) slashing damage."
+          ]
+        },
+        {
+          "name": "Sleep Gaze (Gaze, Hybrid Form Only)",
+          "entries": [
+            "One creature within 30 feet of the jackalwere makes a DC 10 Wisdom saving throw. On a failed save  the target is magically charmed. At the beginning of the jackalweres next turn  the target repeats the saving throw. On a success  the effect ends. On a failure  the creature falls unconscious for 10 minutes. Both the charmed and unconscious conditions end if the target takes damage or a creature within reach of the target uses an action to shake the target back to its senses. If the target successfully saves against Sleep Gaze  it is immune to Sleep Gaze for 24 hours. Undead and creatures immune to charm arent affected by it."
+          ]
+        },
+        {
+          "name": "Multiattack",
+          "entries": [
+            "The jackalwere makes two scimitar attacks or makes one scimitar attack and uses Sleep Gaze."
+          ]
+        }
+      ],
+      "legendaryHeader": []
+    },
+    {
+      "name": "Jaculus",
+      "source": "TOB",
+      "size": [
+        "S"
+      ],
+      "type": "Dragon",
+      "ac": [
+        {
+          "ac": 18,
+          "from": [
+            "natural armor"
+          ]
+        }
+      ],
+      "hp": {
+        "average": 65,
+        "formula": "10d6+30"
+      },
+      "speed": {
+        "walk": 20,
+        "climb": 20,
+        "fly": 10
+      },
+      "str": 14,
+      "dex": 18,
+      "con": 17,
+      "int": 13,
+      "wis": 13,
+      "cha": 13,
+      "cr": "3",
+      "senses": [
+        "blindsight 10 ft., darkvision 60 ft., passive Perception 13"
+      ],
+      "languages": [
+        "Common, Draconic"
+      ],
+      "passive": 3,
+      "trait": [
+        {
+          "name": "Spearhead",
+          "entries": [
+            "If the jaculus moves at least 10 feet straight toward a target and hits that target with a jaws attack on the same turn, the jaws attack does an extra 4 (1d8) piercing damage."
+          ]
+        }
+      ],
+      "action": [
+        {
+          "name": "Multiattack",
+          "entries": [
+            "The jaculus makes one jaws attack and one claws attack."
+          ]
+        },
+        {
+          "name": "Jaws",
+          "entries": [
+            "Melee Weapon Attack: +4 to hit, reach 5 ft., one target. Hit: 9 (2d4 + 2) piercing damage."
+          ]
+        },
+        {
+          "name": "Claws",
+          "entries": [
+            "Melee Weapon Attack: +4 to hit, reach 5 ft., one target. Hit: 11 (2d6 + 2) slashing damage."
+          ]
+        }
+      ],
+      "legendaryHeader": []
+    },
+    {
+      "name": "Jaculus",
+      "source": "TOB-2023",
+      "size": [
+        "S"
+      ],
+      "type": "Dragon",
+      "ac": [
+        {
+          "ac": 15,
+          "from": [
+            "natural armor"
+          ]
+        }
+      ],
+      "hp": {
+        "average": 65,
+        "formula": "10d6 + 30"
+      },
+      "speed": {
+        "walk": 10,
+        "fly": 20
+      },
+      "str": 14,
+      "dex": 18,
+      "con": 17,
+      "int": 13,
+      "wis": 13,
+      "cha": 13,
+      "cr": "3",
+      "senses": [
+        "blindsight 10 ft., darkvision 60 ft., passive Perception 13"
+      ],
+      "languages": [
+        "Common, Draconic"
+      ],
+      "passive": 13,
+      "trait": [
+        {
+          "name": "Spearhead",
+          "entries": [
+            "If the jaculus moves at least 10 feet straight toward a target and then hits it with a Bite attack on the same turn, the target takes an extra 4 (1d8) piercing damage. If the target is a creature, it must succeed on a DC 13 Strength saving throw or be knocked prone."
+          ]
+        },
+        {
+          "name": "Standing Leap",
+          "entries": [
+            "The jaculus's long jump is up to 20 feet and its high jump is up to 10 feet, with or without a running start."
+          ]
+        }
+      ],
+      "action": [
+        {
+          "name": "Multiattack",
+          "entries": [
+            "The jaculus makes one Bite attack and two Claw attacks."
+          ]
+        },
+        {
+          "name": "Bite",
+          "entries": [
+            "Melee Weapon Attack: +6 to hit, reach 5 ft., one target. Hit: 8 (1d8 + 4) piercing damage."
+          ]
+        },
+        {
+          "name": "Claws",
+          "entries": [
+            "Melee Weapon Attack: +6 to hit, reach 5 ft., one target. Hit: 7 (1d6 + 4) slashing damage."
+          ]
+        }
+      ],
+      "reaction": [],
+      "legendary": [],
+      "legendaryHeader": []
+    },
+    {
+      "name": "J'ba Fofi Spider",
+      "source": "TOB",
+      "size": [
+        "L"
+      ],
+      "type": "Beast",
+      "ac": [
+        {
+          "ac": 18,
+          "from": [
+            "natural armor"
+          ]
+        }
+      ],
+      "hp": {
+        "average": 75,
+        "formula": "10d10+20"
+      },
+      "speed": {
+        "walk": 40,
+        "climb": 40
+      },
+      "str": 17,
+      "dex": 17,
+      "con": 15,
+      "int": 4,
+      "wis": 13,
+      "cha": 6,
+      "cr": "3",
+      "senses": [
+        "blindsight 10 ft., darkvision 60 ft., passive Perception 11"
+      ],
+      "languages": [],
+      "passive": 10,
+      "trait": [
+        {
+          "name": "Jungle Stealth",
+          "entries": [
+            "The j'ba fofi spider gains an additional +2 to Stealth (+7 in total) in forest or jungle terrain."
+          ]
+        },
+        {
+          "name": "Camouflaged Webs",
+          "entries": [
+            "It takes a successful DC 15 Wisdom (Perception) check to spot the j'ba fofi's web. A creature that fails to notice a web and comes into contact with it is restrained by the web. A restrained creature can pull free from the web by using an action and making a successful DC 12 Strength check. The web can be attacked and destroyed (AC 10; hp 5; vulnerable to fire damage; immune to bludgeoning, poison, and psychic damage)."
+          ]
+        },
+        {
+          "name": "Spider Climb",
+          "entries": [
+            "The j'ba fofi can climb difficult surfaces, including upside down on ceilings, without needing to make an ability check."
+          ]
+        },
+        {
+          "name": "Spider Symbiosis",
+          "entries": [
+            "No ordinary spider will attack the j'ba fofi unless magically controlled or the j'ba fofi attacks it first. In addition, every j'ba fofi is accompanied by a swarm of spiders (a variant of the swarm of insects), which moves and attacks according to the j'ba fofi's mental command (commanding the swarm does not require an action by the j'ba fofi)."
+          ]
+        },
+        {
+          "name": "Web Sense",
+          "entries": [
+            "While in contact with a web, the j'ba fofi knows the exact location of any other creature in contact with the same web."
+          ]
+        },
+        {
+          "name": "Web Walker",
+          "entries": [
+            "The j'ba fofi ignores movement restrictions caused by webbing."
+          ]
+        }
+      ],
+      "action": [
+        {
+          "name": "Bite",
+          "entries": [
+            "Melee Weapon Attack: +5 to hit, reach 5 ft., one creature. Hit: 8 (1d10 + 3) piercing damage plus 22 (5d8) poison damage, or half as much poison damage with a successful DC 12 Constitution saving throw. A target dropped to 0 hit points by this attack is stable but poisoned and paralyzed for 1 hour, even after regaining hit points."
+          ]
+        }
+      ],
+      "legendaryHeader": []
+    },
+    {
+      "name": "J’ba Fofi Spider",
+      "source": "TOB-2023",
+      "size": [
+        "L"
+      ],
+      "type": "Beast",
+      "ac": [
+        {
+          "ac": 18,
+          "from": [
+            "natural armor"
+          ]
+        }
+      ],
+      "hp": {
+        "average": 75,
+        "formula": "10d10 + 20"
+      },
+      "speed": {
+        "walk": 40
+      },
+      "str": 17,
+      "dex": 17,
+      "con": 15,
+      "int": 4,
+      "wis": 13,
+      "cha": 6,
+      "cr": "3",
+      "senses": [
+        "blindsight 10 ft., darkvision 60 ft., passive Perception 11"
+      ],
+      "languages": [
+        "—"
+      ],
+      "passive": 11,
+      "trait": [
+        {
+          "name": "Camouflaged Webs",
+          "entries": [
+            "With 10 minutes of work, the j'ba fofi can create a camouflaged web in a 10-foot cube. The web must be anchored between two solid mases or layered across a floor, wall, or ceiling. A camouflaged web layered over a flat surface has a depth of 5 feet. The web is camouflaged to match its surroundings, requiring a successful DC 15 Wisdom (Perception) check to notice them. Each creature that starts its turn in the camouflaged web or that enters it during the creature's turn must succeed on a DC 13 Dexterity saving throw or be restrained. A creature, including the restrained creature, can take its action to break the webbing and free the restrained creature by succeeding on a DC 13 Strength check. The webbing can also be attacked and destroyed (AC 10; hp 5; vulnerability to fire damage; immunity to bludgeoning, poison, and psychic damage)."
+          ]
+        },
+        {
+          "name": "Forest Camouflage",
+          "entries": [
+            "The j'ba fofi has advantage on Dexterity (Stealth) checks made to hide in forested terrain."
+          ]
+        },
+        {
+          "name": "Spider Climb",
+          "entries": [
+            "The j'ba fofi can climb difficult surfaces, including upside down on ceilings, without needing to make an ability check."
+          ]
+        },
+        {
+          "name": "Spider Passivism",
+          "entries": [
+            "No spider can willingly attack the j'ba fofi, unless attacked first. A spider can be forced to do so through magical means."
+          ]
+        },
+        {
+          "name": "Web Sense",
+          "entries": [
+            "While in contact with a web, the j'ba fofi knows the exact location of any other creature in contact with the same web."
+          ]
+        },
+        {
+          "name": "Web Walker",
+          "entries": [
+            "The j'ba fofi ignores movement restrictions caused by webbing."
+          ]
+        }
+      ],
+      "action": [
+        {
+          "name": "Bite",
+          "entries": [
+            "Melee Weapon Attack: +5 to hit, reach 5 ft., one creature. Hit: 8 (1d10 + 3) piercing damage, and the target must make a DC 12 Constitution saving throw, taking 18 (4d8) poison damage on a failed save, or half as much damage on a successful one. If the poison damage reduces the target to 0 hp, the target is stable but poisoned for 1 hour, even after regaining hp, and is paralyzed while poisoned in this way."
+          ]
+        },
+        {
+          "name": "Call Spiderlings (1/Day)",
+          "entries": [
+            "The j'ba fofi releases pheromones and calls 1 swarm of spiders. The spiders arrive in 1d4 rounds, acting as allies of the j'ba fofi and obeying its pheromone commands. The spiders remain for 1 hour, until the j'ba fofi dies, or until the j'ba fofi dismisses them as a bonus action."
+          ]
+        }
+      ],
+      "reaction": [],
+      "legendary": [],
+      "legendaryHeader": []
+    },
+    {
+      "name": "Jiangshi",
+      "source": "CC",
+      "size": [
+        "M"
+      ],
+      "type": "Undead",
+      "ac": [
+        {
+          "ac": 15,
+          "from": [
+            "natural armor"
+          ]
+        }
+      ],
+      "hp": {
+        "average": 117,
+        "formula": "18d8+36"
+      },
+      "speed": {
+        "walk": 20
+      },
+      "str": 17,
+      "dex": 10,
+      "con": 14,
+      "int": 6,
+      "wis": 12,
+      "cha": 14,
+      "cr": "6",
+      "senses": [
+        "blindsight 60 ft. (blind beyond this radius), passive Perception 14"
+      ],
+      "languages": [
+        "understands any languages it knew in life but can't speak"
+      ],
+      "passive": 4,
+      "trait": [
+        {
+          "name": "Blind Senses",
+          "entries": [
+            "The jiangshi can't use its blindsight while deafened."
+          ]
+        },
+        {
+          "name": "Keen Hearing",
+          "entries": [
+            "The jiangshi has advantage on Wisdom (Perception) checks that rely on hearing."
+          ]
+        },
+        {
+          "name": "Prayer of Magic Resistance",
+          "entries": [
+            "The jiangshi has advantage on saving throws against spells and other magical effects. A creature can take its action while within 5 feet of the jiangshi to rip the prayer off the jiangshi by succeeding on a DC 16 Strength check. The jiangshi loses this trait if its prayer scroll is removed."
+          ]
+        },
+        {
+          "name": "Standing Leap",
+          "entries": [
+            "The jiangshi's long jump is up to 30 feet and its high jump is up to 15 feet, with or without a running start."
+          ]
+        },
+        {
+          "name": "Terrifying Appearance",
+          "entries": [
+            "When a creature that can see the jiangshi starts its turn within 30 feet of the jiangshi, it must make a DC 14 Wisdom saving throw, unless the jiangshi is incapacitated. On a failed save, the creature is frightened for 1 minute. A creature can repeat the saving throw at the end of each of its turns, ending the effect on itself on a success. If a creature's saving throw is successful or the effect ends for it, the creature is immune to the jiangshi's Terrifying Appearance for the next 24 hours."
+          ]
+        }
+      ],
+      "action": [
+        {
+          "name": "Multiattack",
+          "entries": [
+            "The jiangshi makes two claw attacks. It can use Life Drain in place of one claw attack."
+          ]
+        },
+        {
+          "name": "Claw",
+          "entries": [
+            "Melee Weapon Attack: +6 to hit, reach 5 ft., one target. Hit: 12 (2d8 + 3) slashing damage. The target is grappled (escape DC 14) if it is a Medium or smaller creature and the jiangshi doesn't have two other creatures grappled."
+          ]
+        },
+        {
+          "name": "Life Drain",
+          "entries": [
+            "Melee Weapon Attack: +6 to hit, reach 5 ft., one creature that is grappled by the jiangshi, incapacitated, or restrained. Hit: 14 (4d6) necrotic damage. The target must succeed on a DC 14 Constitution saving throw or its hp maximum is reduced by an amount equal to the necrotic damage taken. This reduction lasts until the target finishes a long rest. The target dies if this effect reduces its hp maximum to 0. \n\nA humanoid slain in this way rises 24 hours later as a jiangshi, unless the humanoid is restored to life, its body is bathed in vinegar before burial, or its body is destroyed."
+          ]
+        }
+      ],
+      "legendaryHeader": []
+    },
+    {
+      "name": "Jinmenju",
+      "source": "CC",
+      "size": [
+        "H"
+      ],
+      "type": "Plant",
+      "ac": [
+        {
+          "ac": 14,
+          "from": [
+            "natural armor"
+          ]
+        }
+      ],
+      "hp": {
+        "average": 126,
+        "formula": "12d12+48"
+      },
+      "speed": {
+        "walk": 0
+      },
+      "str": 16,
+      "dex": 1,
+      "con": 19,
+      "int": 17,
+      "wis": 8,
+      "cha": 22,
+      "cr": "9",
+      "senses": [
+        "darkvision 60 ft., tremorsense 120 ft. (blind beyond this radius), passive Perception 13"
+      ],
+      "languages": [
+        "all languages known by creatures within 120 feet"
+      ],
+      "passive": 3,
+      "trait": [
+        {
+          "name": "Burrowing Roots",
+          "entries": [
+            "Whenever the jinmenju makes a root attack, it can choose a point on the ground within 120 feet of it. The root bursts from the ground, and that point becomes the attack's point of origin. After attacking, the exposed root protrudes from that point, and the jinmenju gains a reaction each turn that it can only use to make an opportunity attack with that root. A root has AC 15, 45 hp, and resistance to bludgeoning, piercing, and slashing damage from nonmagical attacks. Damaging a root doesn't damage the jinmenju tree. The jinmenju can have up to 5 roots active at one time. If it makes a root attack while it has 5 roots active, one of the active roots burrows back into the ground and a new root appears at the location of the new attack."
+          ]
+        },
+        {
+          "name": "Laughing Fruit",
+          "entries": [
+            "If a creature with Intelligence 5 or higher eats a bite of the fruit of the jinmenju, it must succeed on a DC 16 Wisdom saving throw or fall prone, becoming incapacitated by fits of laughter as it perceives everything as hilariously funny for 1 minute. A creature can repeat the saving throw at the end of each of its turns, ending the effect on itself on a success. If the target takes damage while prone, it has advantage on the saving throw."
+          ]
+        }
+      ],
+      "action": [
+        {
+          "name": "Multiattack",
+          "entries": [
+            "The jinmenju makes two root attacks."
+          ]
+        },
+        {
+          "name": "Root",
+          "entries": [
+            "Melee Weapon Attack: +7 to hit, reach 10 ft., one target. Hit: 14 (2d10 + 3) bludgeoning damage plus 14 (4d6) psychic damage."
+          ]
+        }
+      ],
+      "legendary": [
+        {
+          "name": "Root",
+          "entries": [
+            "The jimenju makes one root attack."
+          ]
+        },
+        {
+          "name": "Revitalize Roots",
+          "entries": [
+            "The jinmenju restores 10 (3d6) hp to each of its exposed roots."
+          ]
+        },
+        {
+          "name": "Mirthful Miasma (Costs 2 Actions)",
+          "entries": [
+            "The jinmenju emits a puff of purple gas around its roots. Each creature within 10 feet of an exposed root must succeed on a DC 16 Constitution saving throw or fall prone with laughter, becoming incapacitated and unable to stand up until the end of its next turn. A creature in an area of overlapping gas only makes the saving throw once. A creature with an Intelligence score of 4 or less isn't affected."
+          ]
+        }
+      ],
+      "legendaryHeader": [
+        "The jinmenju can take 3 legendary actions, choosing from the options below. Only one legendary action option can be used at a time and only at the end of another creature's turn. The jinmenju regains spent legendary actions at the start of its turn."
+      ]
+    },
+    {
+      "name": "Jinnborn Air Pirate",
+      "source": "TOB3",
+      "size": [
+        "M"
+      ],
+      "type": "Humanoid",
+      "ac": [
+        {
+          "ac": 14,
+          "from": [
+            "Flamboyant Defense"
+          ]
+        }
+      ],
+      "hp": {
+        "average": 26,
+        "formula": "4d8+8"
+      },
+      "speed": {
+        "walk": 30
+      },
+      "str": 13,
+      "dex": 15,
+      "con": 14,
+      "int": 10,
+      "wis": 12,
+      "cha": 14,
+      "cr": "1/2",
+      "senses": [
+        "darkvision 60', passive Perception 11"
+      ],
+      "languages": [
+        "Common, Auran"
+      ],
+      "passive": 1,
+      "trait": [
+        {
+          "name": "Elemental Weapons",
+          "entries": [
+            "Its weapon attacks are imbued with its elemental power. When the jinnborn hits with any weapon the weapon deals an extra 1d6 lightning (included in the attack)."
+          ]
+        },
+        {
+          "name": "Flamboyant Defense",
+          "entries": [
+            "While it is wearing no armor and wielding no shield its AC includes its Cha modifier."
+          ]
+        },
+        {
+          "name": "Knows the Ropes",
+          "entries": [
+            "Has proficiency with airships sandships or waterborne ships (the jinnborn's choice). It adds its proficiency bonus to any check it makes to control the chosen type of ship and it adds its proficiency bonus to any saves made while on the chosen type of vehicle."
+          ]
+        }
+      ],
+      "action": [
+        {
+          "name": "Rapier",
+          "entries": [
+            "Melee Weapon Attack: +4 to hit, 5 ft., one target, 6 (1d8+2) piercing damage + 3 (1d6) lightning."
+          ]
+        },
+        {
+          "name": "Shortbow",
+          "entries": [
+            "Ranged Weapon Attack: +4 to hit 80/320' one target 5 (1d6+2) piercing damage + 3 (1d6) lightning."
+          ]
+        }
+      ],
+      "reaction": [
+        {
+          "name": "Parry",
+          "entries": [
+            "+ 2 to its AC vs. one melee attack that would hit it if it can see attacker and wielding melee weapon."
+          ]
+        }
+      ],
+      "legendaryHeader": []
+    },
+    {
+      "name": "Jotun Giant",
+      "source": "TOB",
+      "size": [
+        "G"
+      ],
+      "type": "Giant",
+      "ac": [
+        {
+          "ac": 20,
+          "from": [
+            "natural armor"
+          ]
+        }
+      ],
+      "hp": {
+        "average": 407,
+        "formula": "22d20+176"
+      },
+      "speed": {
+        "walk": 60
+      },
+      "str": 30,
+      "dex": 8,
+      "con": 26,
+      "int": 18,
+      "wis": 20,
+      "cha": 14,
+      "cr": "22",
+      "senses": [
+        "darkvision 120 ft., passive Perception 15"
+      ],
+      "languages": [
+        "Common, Giant"
+      ],
+      "passive": 10,
+      "trait": [
+        {
+          "name": "Immortality",
+          "entries": [
+            "Jotuns suffer no ill effects from age, and are immune to effects that reduce ability scores and hit point maximum."
+          ]
+        },
+        {
+          "name": "Innate Spellcasting",
+          "entries": [
+            "the Jotun giant's innate spellcasting ability is Wisdom (spell save DC 19). It can innately cast the following spells, requiring no material components:\n\nat will: earthquake, shapechange, speak with animals\n\n3/day: bestow curse, gust of wind\n\n1/day: divination"
+          ]
+        },
+        {
+          "name": "Magic Resistance",
+          "entries": [
+            "The giant has advantage on saving throws against spells and other magical effects."
+          ]
+        },
+        {
+          "name": "Magic Weapons",
+          "entries": [
+            "The giant's weapon attacks are magical."
+          ]
+        },
+        {
+          "name": "Too Big to Notice",
+          "entries": [
+            "The sheer size of the Jotun giant often causes those near it to confuse one at rest for part of the landscape. The jotun has advantage on Stealth checks when not moving."
+          ]
+        }
+      ],
+      "action": [
+        {
+          "name": "Multiattack",
+          "entries": [
+            "The giant makes two greatclub attacks and a frightful presence attack, or one rock throwing attack."
+          ]
+        },
+        {
+          "name": "Greatclub",
+          "entries": [
+            "Melee Weapon Attack: +16 to hit, reach 30 ft., one target. Hit: 55 (10d8 + 10) bludgeoning damage."
+          ]
+        },
+        {
+          "name": "Rock",
+          "entries": [
+            "Ranged Weapon Attack: +16 to hit, range 90/240 ft., one target. Hit: 49 (6d12 + 10) bludgeoning damage."
+          ]
+        },
+        {
+          "name": "Frightful Presence",
+          "entries": [
+            "Each creature of the giant's choice that is within 120 feet of the giant and aware of it must succeed on a DC 19 Wisdom saving throw or become frightened for 1 minute. A creature repeats the saving throw at the end of each of its turns, ending the effect on itself on a success. Once a creature's saving throw is successful, it is immune to the giant's Frightful Presence for the next 24 hours."
+          ]
+        }
+      ],
+      "reaction": [
+        {
+          "name": "Rock Catching",
+          "entries": [
+            "If a rock or similar object is hurled at the giant, the giant can, with a successful DC 10 Dexterity saving throw, catch the missile and take no bludgeoning damage from it."
+          ]
+        }
+      ],
+      "legendary": [
+        {
+          "name": "Detect",
+          "entries": [
+            "The Jotun giant makes a Wisdom (Perception) check."
+          ]
+        },
+        {
+          "name": "Planar Return",
+          "entries": [
+            "If banished, a Jotun giant can return to the plane it departed 2/day. If banished a third time, it cannot return."
+          ]
+        },
+        {
+          "name": "Sweeping Blow",
+          "entries": [
+            "The Jotun giant can sweep its greatclub in an arc around itself. The sweep affects a semicircular path 30 feet wide around the giant. All targets in that area take 46 (8d8 + 10) bludgeoning damage, or no damage with a successful DC 19 Dexterity saving throw."
+          ]
+        }
+      ],
+      "legendaryHeader": [
+        "The Jotun giant can take 1 legendary action, and only at the end of another creature's turn. The giant regains the spent legendary action at the start of its turn."
+      ],
+      "spellcasting": [
+        {
+          "name": "Innate Spellcasting",
+          "headerEntries": [
+            "the Jotun giant's innate spellcasting ability is Wisdom (spell save DC 19). It can innately cast the following spells, requiring no material components:\n\nat will: earthquake, shapechange, speak with animals\n\n3/day: bestow curse, gust of wind\n\n1/day: divination"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Jotun",
+      "source": "TOB-2023",
+      "size": [
+        "G"
+      ],
+      "type": "Giant",
+      "ac": [
+        {
+          "ac": 20,
+          "from": [
+            "natural armor"
+          ]
+        }
+      ],
+      "hp": {
+        "average": 370,
+        "formula": "20d20 + 160"
+      },
+      "speed": {
+        "walk": 60
+      },
+      "str": 30,
+      "dex": 8,
+      "con": 26,
+      "int": 18,
+      "wis": 20,
+      "cha": 14,
+      "cr": "22",
+      "senses": [
+        "darkvision 120 ft., passive Perception 15"
+      ],
+      "languages": [
+        "Common, Giant"
+      ],
+      "passive": 15,
+      "trait": [
+        {
+          "name": "Demigod's Vitality",
+          "entries": [
+            "The jotun's ability scores and hp maximum can't be reduced except by means of a wish spell."
+          ]
+        },
+        {
+          "name": "Icy Weapons",
+          "entries": [
+            "The jotun's weapon attacks are magical. When the jotun hits with any weapon, the weapon deals an extra 6d8 cold damage (included in the attack)."
+          ]
+        },
+        {
+          "name": "Magic Resistance",
+          "entries": [
+            "The jotun has advantage on saving throws against spells and other magical effects."
+          ]
+        },
+        {
+          "name": "Material Bound",
+          "entries": [
+            "The jotun is immune to any spell or effect that would force it to leave the Material Plane, unless the jotun wants to leave. It has disadvantage on saving throws against effects that would return it to the Material Plane from another plane of existence."
+          ]
+        },
+        {
+          "name": "Too Big to Notice",
+          "entries": [
+            "While the jotun remains motionless in nonmagical, natural terrain, it has advantage on Dexterity (Stealth) checks."
+          ]
+        }
+      ],
+      "action": [
+        {
+          "name": "Multiattack",
+          "entries": [
+            "The jotun can use its Frightful Presence. It then makes three Greatclub or Rock attacks."
+          ]
+        },
+        {
+          "name": "Greatclub",
+          "entries": [
+            "Melee Weapon Attack: +17 to hit, reach 15 ft., one target. Hit: 28 (4d8 + 10) bludgeoning damage plus 27 (6d8) cold damage."
+          ]
+        },
+        {
+          "name": "Rock",
+          "entries": [
+            "Ranged Weapon Attack: +17 to hit, range 60/240 ft., one target. Hit: 32 (4d10 + 10) bludgeoning damage plus 27 (6d8) cold damage."
+          ]
+        },
+        {
+          "name": "Frightful Presence",
+          "entries": [
+            "Each creature of the jotun's choice within 120 feet of the jotun and aware of it must succeed on a DC 20 Wisdom saving throw or become frightened for 1 minute. A creature can repeat the saving throw at the end of each of its turns, ending the effect on itself on a success. If a creature's saving throw is successful or the effect ends for it, the creature is immune to the jotun's Frightful Presence for the next 24 hours."
+          ]
+        },
+        {
+          "name": "Icy Sweep (Recharge 5-6)",
+          "entries": [
+            "The jotun swings its ice-coated greatclub in a wide arc. Each creature within 20 feet of the jotun must make a DC 23 Dexterity saving throw. On a failure, a creature takes 36 (8d8) bludgeoning damage and 54 (12d8) cold damage and is pushed up to 15 feet away from the jotun and knocked prone. On a success, a creature takes half the damage and isn't pushed or knocked prone."
+          ]
+        },
+        {
+          "name": "Spellcasting",
+          "entries": [
+            "The jotun casts one of the following spells, requiring no material components and using Wisdom as the spellcasting ability (spell save DC 20):\nAt will: earthquake, speak with animals\n3/day: bestow curse, gust of wind\n1/day: divination"
+          ]
+        }
+      ],
+      "reaction": [
+        {
+          "name": "Rock Catching",
+          "entries": [
+            "If a rock or similar object is hurled at the jotun, the jotun can, with a successful DC 10 Dexterity saving throw, catch the missile and take no bludgeoning damage from it."
+          ]
+        }
+      ],
+      "legendary": [],
+      "legendaryHeader": []
+    },
+    {
+      "name": "Jubjub Bird",
+      "source": "TOB3",
+      "size": [
+        "L"
+      ],
+      "type": "Beast",
+      "ac": [
+        {
+          "ac": 13,
+          "from": [
+            "natural armor"
+          ]
+        }
+      ],
+      "hp": {
+        "average": 91,
+        "formula": "14d10+14"
+      },
+      "speed": {
+        "walk": 30,
+        "fly": 10
+      },
+      "str": 16,
+      "dex": 13,
+      "con": 12,
+      "int": 3,
+      "wis": 12,
+      "cha": 11,
+      "cr": "4",
+      "senses": [
+        "passive Perception 11"
+      ],
+      "languages": [
+        "—"
+      ],
+      "passive": 1,
+      "trait": [
+        {
+          "name": "Shrill Screech",
+          "entries": [
+            "When agitated the jubjub bird makes a near constant shrill and high scream giving it advantage on Cha (Intimidation) checks."
+          ]
+        },
+        {
+          "name": "Stubborn",
+          "entries": [
+            "Has advantage on saves vs. being charmed. In addition Wis (Animal Handling) checks are made with disadvantage vs. the jubjub bird."
+          ]
+        },
+        {
+          "name": "Unpredictable",
+          "entries": [
+            "Opportunity attacks vs. the jubjub bird are made with disadvantage."
+          ]
+        }
+      ],
+      "action": [
+        {
+          "name": "Multiattack",
+          "entries": [
+            "Two Bites or one Bite and one Constrict."
+          ]
+        },
+        {
+          "name": "Bite",
+          "entries": [
+            "Melee Weapon Attack: +5 to hit, 10 ft., one creature,. 7 (1d8+3) piercing damage + 7 (2d6) poison and the target must make DC 13 Con save or be poisoned for 1 min. The target can re-save at end of each of its turns success ends effect on itself."
+          ]
+        },
+        {
+          "name": "Constrict",
+          "entries": [
+            "Melee Weapon Attack: +5 to hit, 5 ft., one creature,. 14 (2d10+3) bludgeoning damage and target is grappled (escape DC 13). Until grapple ends creature is restrained and bird can't constrict another target."
+          ]
+        }
+      ],
+      "reaction": [
+        {
+          "name": "Impassioned Riposte",
+          "entries": [
+            "When a creature the jubjub bird can see misses it with an attack while within 10 ft. of it the jubjub bird can make one Bite attack vs. the attacker."
+          ]
+        }
+      ],
+      "legendaryHeader": []
+    },
+    {
+      "name": "Juniper Sheriff",
+      "source": "TOB3",
+      "size": [
+        "S"
+      ],
+      "type": "Fey",
+      "ac": [
+        {
+          "ac": 13,
+          "from": [
+            "natural armor"
+          ]
+        }
+      ],
+      "hp": {
+        "average": 31,
+        "formula": "7d6+7"
+      },
+      "speed": {
+        "walk": 40
+      },
+      "str": 7,
+      "dex": 16,
+      "con": 13,
+      "int": 12,
+      "wis": 17,
+      "cha": 10,
+      "cr": "1/2",
+      "senses": [
+        "darkvision 60', passive Perception 15"
+      ],
+      "languages": [
+        "Common, Sylvan"
+      ],
+      "passive": 3,
+      "trait": [
+        {
+          "name": "Aura of Honesty",
+          "entries": [
+            "Creature that enters space within 10 ft. of sheriff for 1st time on a turn or starts turn there: DC 13 Cha save or be unable to speak deliberate lie until it starts its turn more than 10 ft. away from sheriff. Creatures affected by this are aware of it and sheriff knows whether creature in area succeeded/failed save."
+          ]
+        },
+        {
+          "name": "Sheriff's Duty",
+          "entries": [
+            "Knows if it hears a lie and can't speak deliberate lie."
+          ]
+        },
+        {
+          "name": "Unfailing Memory",
+          "entries": [
+            "Remembers every creature that has ever spoken to it. If creature has spoken to sheriff and speaks to sheriff again while polymorphed or disguised sheriff has advantage on Int (Investigation) Wis (Insight) and Wis (Perception) checks to identify or recognize that creature."
+          ]
+        }
+      ],
+      "action": [
+        {
+          "name": "Saber",
+          "entries": [
+            "Melee Weapon Attack: +5 to hit, 5 ft., one target, 7 (1d8+3) slashing damage."
+          ]
+        },
+        {
+          "name": "Bitter Truth",
+          "entries": [
+            "Ranged Spell Attack: +5 to hit, 60 ft., one target, 8 (2d4+3) psychic and target: disad- vantage on next save vs. sheriff's Aura of Honesty for next 1 min."
+          ]
+        }
+      ],
+      "legendaryHeader": []
+    },
+    {
+      "name": "Junk Shaman",
+      "source": "CC",
+      "size": [
+        "S"
+      ],
+      "type": "Humanoid",
+      "ac": [
+        {
+          "ac": 12,
+          "from": [
+            "15 with junk armor"
+          ]
+        }
+      ],
+      "hp": {
+        "average": 42,
+        "formula": "12d6"
+      },
+      "speed": {
+        "walk": 30
+      },
+      "str": 6,
+      "dex": 14,
+      "con": 11,
+      "int": 11,
+      "wis": 17,
+      "cha": 9,
+      "cr": "2",
+      "senses": [
+        "darkvision 60 ft., passive Perception 13"
+      ],
+      "languages": [
+        "Common, Draconic"
+      ],
+      "passive": 10,
+      "trait": [
+        {
+          "name": "Animate Objects (1/Day)",
+          "entries": [
+            "The kobold casts animate objects without any components. Wisdom is its spellcasting ability."
+          ]
+        },
+        {
+          "name": "Junk Armor",
+          "entries": [
+            "As a bonus action, the kobold can create magical armor out of scrap metal and bits of junk it touches. The armor provides AC 13 + Dexterity modifier, and a critical hit scored against the kobold becomes a normal hit instead. The armor lasts until the kobold uses a bonus action to end it, the armor is removed from the kobold, or the kobold dies."
+          ]
+        },
+        {
+          "name": "Pack Tactics",
+          "entries": [
+            "The kobold has advantage on attack rolls against a creature if at least one of the kobold's allies is within 5 feet of the creature and the ally isn't incapacitated."
+          ]
+        },
+        {
+          "name": "Sunlight Sensitivity",
+          "entries": [
+            "While in sunlight, the kobold has disadvantage on attack rolls, as well as on Wisdom (Perception) checks that rely on sight."
+          ]
+        }
+      ],
+      "action": [
+        {
+          "name": "Multiattack",
+          "entries": [
+            "The kobold junk shaman makes two junk staff attacks."
+          ]
+        },
+        {
+          "name": "Junk Staff",
+          "entries": [
+            "Melee Weapon Attack: +4 to hit, reach 5 ft., one target. Hit: 4 (1d4 + 2) bludgeoning damage plus 3 (1d6) fire damage."
+          ]
+        },
+        {
+          "name": "Flame Jet",
+          "entries": [
+            "Ranged Spell Attack: +5 to hit, range 120 ft., one target. Hit: 7 (2d6) fire damage. If the target is a creature or flammable object that isn't being worn or carried, it ignites. Until a creature takes an action to douse the fire, the target takes 3 (1d6) fire damage at the start of each of its turns."
+          ]
+        }
+      ],
+      "legendaryHeader": []
+    }
+  ]
+}
