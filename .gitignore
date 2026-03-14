@@ -1,0 +1,19 @@
+# Dependencies
+node_modules/
+
+# Build outputs (electron-vite + electron-builder)
+out/
+dist/
+
+# Logs
+*.log
+npm-debug.log*
+
+# Environment variables
+.env
+.env.*
+!.env.example
+
+# OS files
+.DS_Store
+Thumbs.db
