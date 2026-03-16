@@ -1,0 +1,31 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(find /c/Users/trevo -iname *D*D*AI*Studio*)",
+      "Bash(find /c/Users/trevo -iname *DnD*AI*)",
+      "Bash(ls -la \"/c/Users/trevo/OneDrive/Desktop/vtt-v2/D&D AI Studio Prototype/\")",
+      "Bash(ls -la \"/c/Users/trevo/OneDrive/Desktop/vtt-v2/D&D AI Studio Prototype/src/\")",
+      "Bash(ls \"/c/Users/trevo/OneDrive/Desktop/vtt-v2/D&D AI Studio Prototype/src/components/\")",
+      "Bash(ls \"/c/Users/trevo/OneDrive/Desktop/vtt-v2/D&D AI Studio Prototype/src/data/\")",
+      "Bash(ls \"/c/Users/trevo/OneDrive/Desktop/vtt-v2/D&D AI Studio Prototype/src/services/\")",
+      "Bash(find \"C:\\\\Users\\\\trevo\\\\OneDrive\\\\Desktop\\\\vtt-v2\\\\D&D AI Studio Prototype\" -type f -name \"*.tsx\" -o -name \"*.ts\" -o -name \"*.json\")",
+      "Bash(find \"C:\\\\Users\\\\trevo\\\\OneDrive\\\\Desktop\\\\vtt-v2\\\\D&D AI Studio Prototype\" -type f -name \"*.ts\" -o -name \"*.js\" -o -name \".env*\")",
+      "Bash(find \"C:\\\\Users\\\\trevo\\\\OneDrive\\\\Desktop\\\\vtt-v2\\\\D&D AI Studio Prototype\" -type f \\\\\\( -name \"*.ts\" -o -name \"*.js\" -o -name \"*.json\" \\\\\\))",
+      "Bash(find \"C:\\\\Users\\\\trevo\\\\OneDrive\\\\Desktop\\\\vtt-v2\\\\D&D AI Studio Prototype\\\\src\" -type f -name \"*.tsx\" -o -name \"*.ts\")",
+      "Bash(grep -r \"gemini\\\\|GEMINI\\\\|genai\\\\|google\" \"C:\\\\Users\\\\trevo\\\\OneDrive\\\\Desktop\\\\vtt-v2\\\\D&D AI Studio Prototype\\\\src\" --include=*.ts --include=*.tsx)",
+      "Bash(ls -la \"C:/Users/trevo/OneDrive/Desktop/vtt-v2/D&D AI Studio Prototype/\")",
+      "Bash(ls -la \"C:/Users/trevo/OneDrive/Desktop/vtt-v2/D&D AI Studio Prototype/src/\")",
+      "Bash(ls -la \"C:/Users/trevo/OneDrive/Desktop/vtt-v2/D&D AI Studio Prototype/src/components/\")",
+      "Bash(ls -la \"C:/Users/trevo/OneDrive/Desktop/vtt-v2/D&D AI Studio Prototype/src/services/\")",
+      "Bash(ls -la \"C:/Users/trevo/OneDrive/Desktop/vtt-v2/D&D AI Studio Prototype/src/data/\")",
+      "Bash(npm install:*)",
+      "Bash(npm list:*)",
+      "Bash(where cl.exe)",
+      "Bash(where msbuild.exe)",
+      "Bash(npx electron-vite:*)",
+      "Bash(npx tsc:*)",
+      "Bash(node -e \"const r = require\\(''./node_modules/react-konva/package.json''\\); console.log\\(''react-konva version:'', r.version\\); console.log\\(''peerDeps:'', JSON.stringify\\(r.peerDependencies\\)\\)\")",
+      "Bash(npm info:*)"
+    ]
+  }
+}

@@ -1,0 +1,9 @@
+node_modules/
+out/
+dist/
+.env
+*.db
+*.db-wal
+*.db-shm
+D&D AI Studio Prototype/
+dungeon-master-screen-vtt.zip

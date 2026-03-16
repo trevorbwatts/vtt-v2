@@ -1,0 +1,58 @@
+@import url('https://fonts.googleapis.com/css2?family=Alegreya:ital,wght@0,400..900;1,400..900&family=Inter:wght@100..900&family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", sans-serif;
+  --font-mono: "JetBrains Mono", monospace;
+  --font-serif: "Alegreya", serif;
+}
+
+@layer base {
+  :root {
+    --bg: #0c0a09;
+    --ink: #e7e5e4;
+    --line: #292524;
+    --accent: #E9BE59;
+    --btn-bg: #D48A17;
+    --surface: #1c1917;
+    --surface-hover: #292524;
+    --parchment-texture: url('https://www.transparenttextures.com/patterns/carbon-fibre.png');
+  }
+
+  body {
+    background-color: var(--bg);
+    color: var(--ink);
+    background-image: var(--parchment-texture);
+    font-family: var(--font-sans);
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    height: 100vh;
+    user-select: none;
+  }
+
+  #root {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-serif);
+  }
+}
+
+::-webkit-scrollbar {
+  width: 4px;
+  height: 4px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--line);
+  border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--accent);
+}
