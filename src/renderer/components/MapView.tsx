@@ -1,5 +1,6 @@
-import { useState, useRef, useEffect, useMemo, memo } from 'react'
+import { useState, useRef, useEffect, useMemo, useCallback, memo } from 'react'
 import { Stage, Layer, Image as KonvaImage, Circle, Text, Group, Rect, Path } from 'react-konva'
+import type Konva from 'konva'
 import type { Token, MapNote, MapNoteType, Combatant, Monster } from '../types'
 import { cn } from '../types'
 import { Upload, User, Skull, Shield, PlusCircle, Search, Map as MapIcon, FileText, Swords, X, EyeOff, Eye, Trash2, ChevronRight } from 'lucide-react'
@@ -52,10 +53,11 @@ function MapView({
   const [selectedMonster, setSelectedMonster] = useState<Monster | null>(null)
   const [monsterQuantity, setMonsterQuantity] = useState(1)
   const [selectedTokenIds, setSelectedTokenIds] = useState<string[]>([])
-  const [isPanning, setIsPanning] = useState(false)
-  const [lastPos, setLastPos] = useState({ x: 0, y: 0 })
-  const [marquee, setMarquee] = useState<{ startX: number; startY: number; endX: number; endY: number } | null>(null)
-  const marqueeStartRef = useRef<{ x: number; y: number } | null>(null)
+  // ── Perf: pan/marquee use refs to avoid React re-renders on every mousemove ──
+  const isPanningRef = useRef(false)
+  const lastPosRef = useRef({ x: 0, y: 0 })
+  const marqueeRef = useRef<{ startX: number; startY: number; endX: number; endY: number } | null>(null)
+  const marqueeRectRef = useRef<Konva.Rect>(null)
   const marqueeDidSelectRef = useRef(false)
 
   const selectedTokenSet = useMemo(() => new Set(selectedTokenIds), [selectedTokenIds])
@@ -181,8 +183,8 @@ function MapView({
 
   const handleStageMouseDown = (e: any) => {
     if (e.evt.button === 2 || e.evt.button === 1) {
-      setIsPanning(true)
-      setLastPos({ x: e.evt.clientX, y: e.evt.clientY })
+      isPanningRef.current = true
+      lastPosRef.current = { x: e.evt.clientX, y: e.evt.clientY }
     } else if (e.evt.button === 0) {
       // Only start marquee if not clicking on a token
       let node = e.target
@@ -195,51 +197,80 @@ function MapView({
         const stage = e.target.getStage()
         const pointer = stage.getPointerPosition()
         const worldPos = getWorldPos(stage, pointer)
-        marqueeStartRef.current = worldPos
-        setMarquee({ startX: worldPos.x, startY: worldPos.y, endX: worldPos.x, endY: worldPos.y })
+        marqueeRef.current = { startX: worldPos.x, startY: worldPos.y, endX: worldPos.x, endY: worldPos.y }
+        // Show the marquee rect via Konva ref
+        const rect = marqueeRectRef.current
+        if (rect) {
+          rect.setAttrs({ x: worldPos.x, y: worldPos.y, width: 0, height: 0, visible: true })
+          rect.getLayer()?.batchDraw()
+        }
       }
     }
   }
 
   const handleStageMouseMove = (e: any) => {
-    if (isPanning) {
+    if (isPanningRef.current) {
       const stage = e.target.getStage()
-      const dx = e.evt.clientX - lastPos.x
-      const dy = e.evt.clientY - lastPos.y
+      const dx = e.evt.clientX - lastPosRef.current.x
+      const dy = e.evt.clientY - lastPosRef.current.y
       stage.position({ x: stage.x() + dx, y: stage.y() + dy })
-      setLastPos({ x: e.evt.clientX, y: e.evt.clientY })
-    } else if (marqueeStartRef.current && (e.evt.buttons & 1)) {
+      lastPosRef.current = { x: e.evt.clientX, y: e.evt.clientY }
+      stage.batchDraw()
+    } else if (marqueeRef.current && (e.evt.buttons & 1)) {
       const stage = e.target.getStage()
       const pointer = stage.getPointerPosition()
       const worldPos = getWorldPos(stage, pointer)
-      setMarquee(prev => prev ? { ...prev, endX: worldPos.x, endY: worldPos.y } : null)
+      marqueeRef.current.endX = worldPos.x
+      marqueeRef.current.endY = worldPos.y
+      // Update Konva rect directly — no React re-render
+      const rect = marqueeRectRef.current
+      if (rect) {
+        const m = marqueeRef.current
+        rect.setAttrs({
+          x: Math.min(m.startX, m.endX),
+          y: Math.min(m.startY, m.endY),
+          width: Math.abs(m.endX - m.startX),
+          height: Math.abs(m.endY - m.startY),
+        })
+        rect.getLayer()?.batchDraw()
+      }
     }
   }
 
   const handleStageMouseUp = () => {
-    setIsPanning(false)
-    if (marqueeStartRef.current && marquee) {
-      const dx = Math.abs(marquee.endX - marquee.startX)
-      const dy = Math.abs(marquee.endY - marquee.startY)
+    isPanningRef.current = false
+    const m = marqueeRef.current
+    if (m) {
+      const dx = Math.abs(m.endX - m.startX)
+      const dy = Math.abs(m.endY - m.startY)
       if (dx > 5 || dy > 5) {
-        const minX = Math.min(marquee.startX, marquee.endX)
-        const maxX = Math.max(marquee.startX, marquee.endX)
-        const minY = Math.min(marquee.startY, marquee.endY)
-        const maxY = Math.max(marquee.startY, marquee.endY)
+        const minX = Math.min(m.startX, m.endX)
+        const maxX = Math.max(m.startX, m.endX)
+        const minY = Math.min(m.startY, m.endY)
+        const maxY = Math.max(m.startY, m.endY)
         const enclosed = tokens.filter(t => t.x >= minX && t.x <= maxX && t.y >= minY && t.y <= maxY)
         setSelectedTokenIds(enclosed.map(t => t.id))
         marqueeDidSelectRef.current = true
       }
-      marqueeStartRef.current = null
-      setMarquee(null)
+      marqueeRef.current = null
+      // Hide the marquee rect
+      const rect = marqueeRectRef.current
+      if (rect) {
+        rect.setAttrs({ visible: false, width: 0, height: 0 })
+        rect.getLayer()?.batchDraw()
+      }
     }
   }
 
   const handleWheel = (e: any) => {
     e.evt.preventDefault()
     const stage = e.target.getStage()
-    const oldPos = stage.position()
-    stage.position({ x: oldPos.x - e.evt.deltaX, y: oldPos.y - e.evt.deltaY })
+    // Normalize deltaMode: 0=pixels (trackpad), 1=lines, 2=pages
+    const scale = e.evt.deltaMode === 1 ? 20 : e.evt.deltaMode === 2 ? stage.height() : 1
+    const dx = e.evt.deltaX * scale
+    const dy = e.evt.deltaY * scale
+    stage.position({ x: stage.x() - dx, y: stage.y() - dy })
+    stage.batchDraw()
   }
 
   return (
@@ -346,45 +377,55 @@ function MapView({
               </Group>
             ))}
 
-            {tokens.map(token => (
-              <Group key={token.id} name="token" x={token.x} y={token.y} draggable
-                onDragEnd={(e) => onTokenDrag(token.id, e.target.x(), e.target.y())}
-                onContextMenu={(e) => handleTokenContextMenu(e, token.id)}
-                onClick={(e) => {
-                  e.cancelBubble = true
-                  if (e.evt.shiftKey || e.evt.ctrlKey || e.evt.metaKey) {
-                    setSelectedTokenIds(prev => prev.includes(token.id) ? prev.filter(id => id !== token.id) : [...prev, token.id])
-                  } else {
-                    setSelectedTokenIds([token.id])
-                  }
-                }}>
-                <Circle radius={20} fill={token.color}
-                  stroke={selectedTokenSet.has(token.id) ? '#E9BE59' : 'white'}
-                  strokeWidth={selectedTokenSet.has(token.id) ? 4 : 2}
-                  shadowBlur={selectedTokenSet.has(token.id) ? 15 : 5}
-                  shadowColor={selectedTokenSet.has(token.id) ? '#E9BE59' : 'black'}
-                  opacity={token.hidden ? 0.4 : 1} />
-                {token.hidden && (
-                  <Path data="M9.88 9.88l-3.29-3.29m7.53 7.53l3.29 3.29M3 3l18 18M10.37 4.37a11 11 0 0 1 10.63 7.63 11 11 0 0 1-7.01 6.14m-3.99-.14A11 11 0 0 1 3 12a11 11 0 0 1 3.17-4.83m2.22 2.22a3 3 0 0 0 4.24 4.24"
-                    stroke="white" strokeWidth={2} lineCap="round" lineJoin="round" scale={{ x: 0.8, y: 0.8 }} x={-10} y={-10} />
-                )}
-                <Text text={token.name} fontSize={12} fill="white" y={25} align="center" width={100} x={-50}
-                  fontStyle="bold" fontFamily="Inter" opacity={token.hidden ? 0.6 : 1} />
-              </Group>
-            ))}
-            {marquee && (
-              <Rect
-                x={Math.min(marquee.startX, marquee.endX)}
-                y={Math.min(marquee.startY, marquee.endY)}
-                width={Math.abs(marquee.endX - marquee.startX)}
-                height={Math.abs(marquee.endY - marquee.startY)}
-                fill="rgba(233,190,89,0.08)"
-                stroke="#E9BE59"
-                strokeWidth={1}
-                dash={[4, 4]}
-                listening={false}
-              />
-            )}
+            {tokens.map(token => {
+              const isSelected = selectedTokenSet.has(token.id)
+              return (
+                <Group key={token.id} name="token" x={token.x} y={token.y} draggable
+                  onDragEnd={(e) => onTokenDrag(token.id, e.target.x(), e.target.y())}
+                  onContextMenu={(e) => handleTokenContextMenu(e, token.id)}
+                  onClick={(e) => {
+                    e.cancelBubble = true
+                    if (e.evt.shiftKey || e.evt.ctrlKey || e.evt.metaKey) {
+                      setSelectedTokenIds(prev => prev.includes(token.id) ? prev.filter(id => id !== token.id) : [...prev, token.id])
+                    } else {
+                      setSelectedTokenIds([token.id])
+                    }
+                  }}
+                  ref={(node: Konva.Group | null) => {
+                    if (node) {
+                      // Always clear + re-cache so selection state changes (stroke, shadow) are reflected
+                      requestAnimationFrame(() => {
+                        try {
+                          node.clearCache()
+                          node.cache({ offset: 15, drawBorder: false })
+                        } catch (_) { /* node may be destroyed before rAF fires */ }
+                      })
+                    }
+                  }}>
+                  <Circle radius={20} fill={token.color}
+                    stroke={isSelected ? '#E9BE59' : 'white'}
+                    strokeWidth={isSelected ? 4 : 2}
+                    shadowBlur={isSelected ? 15 : 5}
+                    shadowColor={isSelected ? '#E9BE59' : 'black'}
+                    opacity={token.hidden ? 0.4 : 1} />
+                  {token.hidden && (
+                    <Path data="M9.88 9.88l-3.29-3.29m7.53 7.53l3.29 3.29M3 3l18 18M10.37 4.37a11 11 0 0 1 10.63 7.63 11 11 0 0 1-7.01 6.14m-3.99-.14A11 11 0 0 1 3 12a11 11 0 0 1 3.17-4.83m2.22 2.22a3 3 0 0 0 4.24 4.24"
+                      stroke="white" strokeWidth={2} lineCap="round" lineJoin="round" scale={{ x: 0.8, y: 0.8 }} x={-10} y={-10} />
+                  )}
+                  <Text text={token.name} fontSize={12} fill="white" y={25} align="center" width={100} x={-50}
+                    fontStyle="bold" fontFamily="Inter" opacity={token.hidden ? 0.6 : 1} />
+                </Group>
+              )
+            })}
+            <Rect
+              ref={marqueeRectRef}
+              visible={false}
+              fill="rgba(233,190,89,0.08)"
+              stroke="#E9BE59"
+              strokeWidth={1}
+              dash={[4, 4]}
+              listening={false}
+            />
           </Layer>
         </Stage>
 
