@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import type { Campaign, Combatant, Token, Monster, MapNote } from '../types'
 import { cn } from '../types'
 import { useScenario } from '../hooks/useScenario'
@@ -7,7 +7,7 @@ import CombatView from './CombatView'
 import DMNotes from './DMNotes'
 import CampaignSettings from './CampaignSettings'
 import AddCombatantModal from './AddCombatantModal'
-import { motion, AnimatePresence } from 'motion/react'
+import { AnimatePresence, motion } from 'motion/react'
 import {
   Menu, ArrowLeft, Edit2, X, FileText, ChevronRight
 } from 'lucide-react'
@@ -19,7 +19,7 @@ interface MainLayoutProps {
 }
 
 export default function MainLayout({ campaign, onCampaignUpdate, onSwitchCampaign }: MainLayoutProps) {
-  const [navSidebarOpen, setNavSidebarOpen] = useState(true)
+  const [navSidebarOpen, setNavSidebarOpen] = useState(false)
   const [leftSidebarOpen, setLeftSidebarOpen] = useState(false)
   const [rightSidebarOpen, setRightSidebarOpen] = useState(false)
   const [settingsOpen, setSettingsOpen] = useState(false)
@@ -86,7 +86,7 @@ export default function MainLayout({ campaign, onCampaignUpdate, onSwitchCampaig
 
   // ── Add enemy to map ──
 
-  const addEnemyToMap = async (monster: Monster, x: number, y: number) => {
+  const addEnemyToMap = useCallback(async (monster: Monster, x: number, y: number) => {
     // Create scenario combatant
     const enemyData: Partial<Combatant> = {
       name: monster.name,
@@ -114,11 +114,11 @@ export default function MainLayout({ campaign, onCampaignUpdate, onSwitchCampaig
       color: '#ef4444',
       combatantId: enemy.id
     })
-  }
+  }, [campaign.id, scenario])
 
   // ── Start combat ──
 
-  const startCombat = async (tokenIds: string[]) => {
+  const startCombat = useCallback(async (tokenIds: string[]) => {
     const selectedTokens = scenario.tokens.filter(t => tokenIds.includes(t.id))
     const current = [...scenario.activeCombatants]
     const newCombatants: Combatant[] = []
@@ -158,7 +158,18 @@ export default function MainLayout({ campaign, onCampaignUpdate, onSwitchCampaig
       await scenario.setActiveCombatantsList([...current, ...newCombatants])
     }
     setRightSidebarOpen(true)
-  }
+  }, [scenario.tokens, scenario.activeCombatants, campaign.players, campaign.npcs, campaign.persistentEnemies, scenario])
+
+  const handleMapNoteDrag = useCallback((id: string, x: number, y: number) => {
+    scenario.upsertMapNote({ id, x, y })
+  }, [scenario.upsertMapNote])
+
+  const handleCombatantUpdate = useCallback((id: string, data: Partial<Combatant>) => {
+    scenario.updateActiveCombatant({ id, ...data })
+  }, [scenario.updateActiveCombatant])
+
+  const handleCollapseLeft = useCallback(() => setLeftSidebarOpen(false), [])
+  const handleCollapseRight = useCallback(() => setRightSidebarOpen(false), [])
 
   // ── Add player/NPC from modal ──
 
@@ -169,13 +180,12 @@ export default function MainLayout({ campaign, onCampaignUpdate, onSwitchCampaig
   return (
     <div className="h-screen flex flex-row font-sans overflow-hidden bg-[var(--bg)] text-[var(--ink)]">
       {/* Navigation Sidebar */}
-      <motion.aside
-        initial={false}
-        animate={{ width: navSidebarOpen ? 280 : 0 }}
+      <aside
         className={cn(
-          "h-full bg-[var(--surface)] overflow-hidden shrink-0 z-30",
+          "h-full bg-[var(--surface)] overflow-hidden shrink-0 z-30 transition-[width] duration-200 ease-out",
           navSidebarOpen && "border-r border-[var(--line)]"
         )}
+        style={{ width: navSidebarOpen ? 280 : 0 }}
       >
         <div className="w-[280px] h-full flex flex-col">
           <div className="h-14 px-4 border-b border-[var(--line)] flex items-center justify-between bg-black/10 shrink-0">
@@ -315,7 +325,7 @@ export default function MainLayout({ campaign, onCampaignUpdate, onSwitchCampaig
             </div>
           </div>
         </div>
-      </motion.aside>
+      </aside>
 
       {/* Main Content Area */}
       <div className="flex-1 flex flex-col overflow-hidden">
@@ -345,23 +355,22 @@ export default function MainLayout({ campaign, onCampaignUpdate, onSwitchCampaig
         {/* Main 3-Panel Layout */}
         <div className="flex-1 flex overflow-hidden relative">
           {/* Left Sidebar: DM Notes */}
-          <motion.aside
-            initial={false}
-            animate={{ width: leftSidebarOpen ? 320 : 0 }}
+          <aside
             className={cn(
-              "bg-[var(--surface)] overflow-hidden shrink-0 z-10",
+              "bg-[var(--surface)] overflow-hidden shrink-0 z-10 transition-[width] duration-200 ease-out",
               leftSidebarOpen && "border-r border-[var(--line)]"
             )}
+            style={{ width: leftSidebarOpen ? 320 : 0 }}
           >
             <div className="w-[320px] h-full relative">
               <div className="absolute inset-0 bg-[var(--parchment-texture)] opacity-10 pointer-events-none" />
               <DMNotes
                 notes={scenario.mapNotes}
                 onDelete={scenario.deleteMapNote}
-                onCollapse={() => setLeftSidebarOpen(false)}
+                onCollapse={handleCollapseLeft}
               />
             </div>
-          </motion.aside>
+          </aside>
 
           {/* Center: Map View */}
           <main className="flex-1 relative bg-[#111] overflow-hidden">
@@ -379,9 +388,7 @@ export default function MainLayout({ campaign, onCampaignUpdate, onSwitchCampaig
                 onTokenDelete={scenario.deleteToken}
                 onMapNoteUpsert={scenario.upsertMapNote}
                 onMapNoteDelete={scenario.deleteMapNote}
-                onMapNoteDrag={(id, x, y) => {
-                  scenario.upsertMapNote({ id, x, y })
-                }}
+                onMapNoteDrag={handleMapNoteDrag}
                 onAddEnemy={addEnemyToMap}
                 onStartCombat={startCombat}
                 onUploadMap={scenario.uploadMapImage}
@@ -394,26 +401,25 @@ export default function MainLayout({ campaign, onCampaignUpdate, onSwitchCampaig
           </main>
 
           {/* Right Sidebar: Combat View */}
-          <motion.aside
-            initial={false}
-            animate={{ width: rightSidebarOpen ? 350 : 0 }}
+          <aside
             className={cn(
-              "bg-[var(--surface)] overflow-hidden shrink-0 z-10",
+              "bg-[var(--surface)] overflow-hidden shrink-0 z-10 transition-[width] duration-200 ease-out",
               rightSidebarOpen && "border-l border-[var(--line)]"
             )}
+            style={{ width: rightSidebarOpen ? 350 : 0 }}
           >
             <div className="w-[350px] h-full relative">
               <div className="absolute inset-0 bg-[var(--parchment-texture)] opacity-10 pointer-events-none" />
               <CombatView
                 activeCombatants={scenario.activeCombatants}
-                onUpdate={(id, data) => scenario.updateActiveCombatant({ id, ...data })}
+                onUpdate={handleCombatantUpdate}
                 onRemove={scenario.removeActiveCombatant}
                 onClear={scenario.clearActiveCombat}
                 onBulkSet={scenario.setActiveCombatantsList}
-                onCollapse={() => setRightSidebarOpen(false)}
+                onCollapse={handleCollapseRight}
               />
             </div>
-          </motion.aside>
+          </aside>
         </div>
 
         {/* Footer */}

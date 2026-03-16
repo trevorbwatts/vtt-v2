@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from 'react'
+import { useState, useRef, useEffect, useMemo, memo } from 'react'
 import { Stage, Layer, Image as KonvaImage, Circle, Text, Group, Rect, Path } from 'react-konva'
 import type { Token, MapNote, MapNoteType, Combatant, Monster } from '../types'
 import { cn } from '../types'
@@ -29,7 +29,7 @@ interface MapViewProps {
   setRightSidebarOpen: (open: boolean) => void
 }
 
-export default function MapView({
+function MapView({
   tokens, mapImageDataUrl, mapNotes, players, npcs, persistentEnemies, scenarioCombatants,
   onTokenDrag, onTokenUpsert, onTokenDelete,
   onMapNoteUpsert, onMapNoteDelete, onMapNoteDrag,
@@ -54,21 +54,36 @@ export default function MapView({
   const [selectedTokenIds, setSelectedTokenIds] = useState<string[]>([])
   const [isPanning, setIsPanning] = useState(false)
   const [lastPos, setLastPos] = useState({ x: 0, y: 0 })
+  const [marquee, setMarquee] = useState<{ startX: number; startY: number; endX: number; endY: number } | null>(null)
+  const marqueeStartRef = useRef<{ x: number; y: number } | null>(null)
+  const marqueeDidSelectRef = useRef(false)
+
+  const selectedTokenSet = useMemo(() => new Set(selectedTokenIds), [selectedTokenIds])
+
+  const filteredBestiary = useMemo(() =>
+    BESTIARY.filter(m => m.name.toLowerCase().includes(monsterSearch.toLowerCase())),
+    [monsterSearch]
+  )
 
   const getNoteColor = (type: MapNoteType) => {
-    const colors: Record<MapNoteType, string> = { treasure: '#E9BE59', quote: '#60a5fa', combat: '#f87171', info: '#34d399', trap: '#a78bfa' }
+    const colors: Record<MapNoteType, string> = { treasure: '#E9BE59', quote: '#60a5fa', combat: '#f87171', info: '#34d399', trap: '#ef4444' }
     return colors[type] || '#ffffff'
   }
 
   const NoteMapIcon = ({ type, color }: { type: MapNoteType; color: string }) => {
-    const paths: Record<MapNoteType, string> = {
-      treasure: 'M21 7.5V6a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v1.5M21 7.5H3M21 7.5v10.5a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7.5M12 7.5V20',
-      quote: 'M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2zM8 7h8M8 11h8',
+    const s256 = 12 / 256
+    if (type === 'treasure') {
+      return <Path data="M184,40H72A56.06,56.06,0,0,0,16,96v96a16,16,0,0,0,16,16H224a16,16,0,0,0,16-16V96A56.06,56.06,0,0,0,184,40Zm40,56v8H192V56.8A40.07,40.07,0,0,1,224,96Zm-88,40H120V104h16Zm-24,16h32a8,8,0,0,0,8-8V120h24v72H80V120h24v24A8,8,0,0,0,112,152Zm40-48V96a8,8,0,0,0-8-8H112a8,8,0,0,0-8,8v8H80V56h96v48ZM64,56.8V104H32V96A40.07,40.07,0,0,1,64,56.8ZM32,120H64v72H32Zm192,72H192V120h32v72Z" fill={color} scale={{ x: s256, y: s256 }} x={-6} y={-6} />
+    }
+    if (type === 'quote') {
+      return <Path data="M232,48H160a40,40,0,0,0-32,16A40,40,0,0,0,96,48H24a8,8,0,0,0-8,8V200a8,8,0,0,0,8,8H96a24,24,0,0,1,24,24,8,8,0,0,0,16,0,24,24,0,0,1,24-24h72a8,8,0,0,0,8-8V56A8,8,0,0,0,232,48ZM96,192H32V64H96a24,24,0,0,1,24,24V200A39.81,39.81,0,0,0,96,192Zm128,0H160a39.81,39.81,0,0,0-24,8V88a24,24,0,0,1,24-24h64ZM160,88h40a8,8,0,0,1,0,16H160a8,8,0,0,1,0-16Zm48,40a8,8,0,0,1-8,8H160a8,8,0,0,1,0-16h40A8,8,0,0,1,208,128Zm0,32a8,8,0,0,1-8,8H160a8,8,0,0,1,0-16h40A8,8,0,0,1,208,160Z" fill={color} scale={{ x: s256, y: s256 }} x={-6} y={-6} />
+    }
+    const paths: Record<Exclude<MapNoteType, 'treasure' | 'quote'>, string> = {
       combat: 'M14.5 17.5 3 6V3h3l11.5 11.5M13 19l-2 2-3-3-2 2L3 17l2-2-3-3 2-2 3 3 2-2M14.5 17.5 19 13M21 6V3h-3l-4.5 4.5',
       info: 'M12 16V12M12 8H12.01M22 12C22 17.5228 17.5228 22 12 22C6.47715 22 2 17.5228 2 12C2 6.47715 6.47715 2 12 2C17.5228 2 22 6.47715 22 12Z',
       trap: 'M9 10L9.01 10M15 10L15.01 10M12 2C7.03 2 3 6.03 3 11C3 13.08 3.71 14.99 4.9 16.5C5.45 17.19 6.13 17.8 6.9 18.27L6.9 20C6.9 21.1 7.8 22 8.9 22L15.1 22C16.2 22 17.1 21.1 17.1 20L17.1 18.27C17.87 17.8 18.55 17.19 19.1 16.5C20.29 14.99 21 13.08 21 11C21 6.03 16.97 2 12 2Z'
     }
-    return <Path data={paths[type]} stroke={color} strokeWidth={2} lineCap="round" lineJoin="round" scale={{ x: 0.5, y: 0.5 }} x={-6} y={-6} />
+    return <Path data={paths[type as Exclude<MapNoteType, 'treasure' | 'quote'>]} stroke={color} strokeWidth={2} lineCap="round" lineJoin="round" scale={{ x: 0.5, y: 0.5 }} x={-6} y={-6} />
   }
 
   useEffect(() => {
@@ -83,13 +98,17 @@ export default function MapView({
 
   useEffect(() => {
     if (!containerRef.current) return
+    let rafId: number
     const observer = new ResizeObserver((entries) => {
-      for (const entry of entries) {
-        setDimensions({ width: entry.contentRect.width, height: entry.contentRect.height })
-      }
+      cancelAnimationFrame(rafId)
+      rafId = requestAnimationFrame(() => {
+        for (const entry of entries) {
+          setDimensions({ width: entry.contentRect.width, height: entry.contentRect.height })
+        }
+      })
     })
     observer.observe(containerRef.current)
-    return () => observer.disconnect()
+    return () => { observer.disconnect(); cancelAnimationFrame(rafId) }
   }, [])
 
   const handleUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -154,23 +173,67 @@ export default function MapView({
     setNoteDraft({ type: 'info', content: '' })
   }
 
+  const getWorldPos = (stage: any, pointer: { x: number; y: number }) => {
+    const transform = stage.getAbsoluteTransform().copy()
+    transform.invert()
+    return transform.point(pointer)
+  }
+
   const handleStageMouseDown = (e: any) => {
     if (e.evt.button === 2 || e.evt.button === 1) {
       setIsPanning(true)
       setLastPos({ x: e.evt.clientX, y: e.evt.clientY })
+    } else if (e.evt.button === 0) {
+      // Only start marquee if not clicking on a token
+      let node = e.target
+      let isToken = false
+      while (node) {
+        if (node.name?.() === 'token') { isToken = true; break }
+        node = node.getParent?.()
+      }
+      if (!isToken) {
+        const stage = e.target.getStage()
+        const pointer = stage.getPointerPosition()
+        const worldPos = getWorldPos(stage, pointer)
+        marqueeStartRef.current = worldPos
+        setMarquee({ startX: worldPos.x, startY: worldPos.y, endX: worldPos.x, endY: worldPos.y })
+      }
     }
   }
 
   const handleStageMouseMove = (e: any) => {
-    if (!isPanning) return
-    const stage = e.target.getStage()
-    const dx = e.evt.clientX - lastPos.x
-    const dy = e.evt.clientY - lastPos.y
-    stage.position({ x: stage.x() + dx, y: stage.y() + dy })
-    setLastPos({ x: e.evt.clientX, y: e.evt.clientY })
+    if (isPanning) {
+      const stage = e.target.getStage()
+      const dx = e.evt.clientX - lastPos.x
+      const dy = e.evt.clientY - lastPos.y
+      stage.position({ x: stage.x() + dx, y: stage.y() + dy })
+      setLastPos({ x: e.evt.clientX, y: e.evt.clientY })
+    } else if (marqueeStartRef.current && (e.evt.buttons & 1)) {
+      const stage = e.target.getStage()
+      const pointer = stage.getPointerPosition()
+      const worldPos = getWorldPos(stage, pointer)
+      setMarquee(prev => prev ? { ...prev, endX: worldPos.x, endY: worldPos.y } : null)
+    }
   }
 
-  const handleStageMouseUp = () => setIsPanning(false)
+  const handleStageMouseUp = () => {
+    setIsPanning(false)
+    if (marqueeStartRef.current && marquee) {
+      const dx = Math.abs(marquee.endX - marquee.startX)
+      const dy = Math.abs(marquee.endY - marquee.startY)
+      if (dx > 5 || dy > 5) {
+        const minX = Math.min(marquee.startX, marquee.endX)
+        const maxX = Math.max(marquee.startX, marquee.endX)
+        const minY = Math.min(marquee.startY, marquee.endY)
+        const maxY = Math.max(marquee.startY, marquee.endY)
+        const enclosed = tokens.filter(t => t.x >= minX && t.x <= maxX && t.y >= minY && t.y <= maxY)
+        setSelectedTokenIds(enclosed.map(t => t.id))
+        marqueeDidSelectRef.current = true
+      }
+      marqueeStartRef.current = null
+      setMarquee(null)
+    }
+  }
 
   const handleWheel = (e: any) => {
     e.evt.preventDefault()
@@ -189,7 +252,7 @@ export default function MapView({
               <button onClick={() => setLeftSidebarOpen(true)}
                 className="h-full px-3 hover:bg-black/5 transition-colors flex items-center justify-center"
                 title="Open Notes">
-                <FileText size={16} />
+                <FileText size={12} className="opacity-50" />
               </button>
               <div className="h-6 w-px bg-[var(--line)] shrink-0" />
             </>
@@ -219,7 +282,7 @@ export default function MapView({
               <button onClick={() => setRightSidebarOpen(true)}
                 className="h-full px-3 hover:bg-black/5 transition-colors flex items-center justify-center"
                 title="Open Initiative Tracker">
-                <Swords size={16} />
+                <Swords size={12} className="opacity-50" />
               </button>
             </>
           )}
@@ -245,14 +308,26 @@ export default function MapView({
           onMouseDown={handleStageMouseDown} onMouseMove={handleStageMouseMove}
           onMouseUp={handleStageMouseUp} onMouseLeave={handleStageMouseUp}
           onContextMenu={handleContextMenu} onWheel={handleWheel}
-          onClick={(e) => { if (e.evt.button === 0) { setContextMenu(null); setTokenContextMenu(null) } }}>
-          <Layer>
+          onClick={(e) => {
+            if (e.evt.button === 0) {
+              setContextMenu(null)
+              setTokenContextMenu(null)
+              if (marqueeDidSelectRef.current) {
+                marqueeDidSelectRef.current = false
+              } else {
+                setSelectedTokenIds([])
+              }
+            }
+          }}>
+          <Layer listening={false}>
             {loadedImage && <KonvaImage image={loadedImage} width={loadedImage.width} height={loadedImage.height} />}
-
+          </Layer>
+          <Layer>
             {mapNotes.map(note => (
               <Group key={note.id} x={note.x} y={note.y} draggable
                 onDragEnd={(e) => onMapNoteDrag(note.id, e.target.x(), e.target.y())}
-                onMouseEnter={() => setHoveredNoteId(note.id)} onMouseLeave={() => setHoveredNoteId(null)}>
+                onMouseEnter={() => setHoveredNoteId(note.id)} onMouseLeave={() => setHoveredNoteId(null)}
+                onClick={(e) => { e.cancelBubble = true; setLeftSidebarOpen(true) }}>
                 <Circle radius={14} fill="#1a1a1a" stroke={hoveredNoteId === note.id ? '#E9BE59' : '#333'} strokeWidth={1}
                   shadowBlur={hoveredNoteId === note.id ? 10 : 5} shadowColor="black" />
                 <NoteMapIcon type={note.type} color={getNoteColor(note.type)} />
@@ -272,7 +347,7 @@ export default function MapView({
             ))}
 
             {tokens.map(token => (
-              <Group key={token.id} x={token.x} y={token.y} draggable
+              <Group key={token.id} name="token" x={token.x} y={token.y} draggable
                 onDragEnd={(e) => onTokenDrag(token.id, e.target.x(), e.target.y())}
                 onContextMenu={(e) => handleTokenContextMenu(e, token.id)}
                 onClick={(e) => {
@@ -284,10 +359,10 @@ export default function MapView({
                   }
                 }}>
                 <Circle radius={20} fill={token.color}
-                  stroke={selectedTokenIds.includes(token.id) ? '#E9BE59' : 'white'}
-                  strokeWidth={selectedTokenIds.includes(token.id) ? 4 : 2}
-                  shadowBlur={selectedTokenIds.includes(token.id) ? 15 : 5}
-                  shadowColor={selectedTokenIds.includes(token.id) ? '#E9BE59' : 'black'}
+                  stroke={selectedTokenSet.has(token.id) ? '#E9BE59' : 'white'}
+                  strokeWidth={selectedTokenSet.has(token.id) ? 4 : 2}
+                  shadowBlur={selectedTokenSet.has(token.id) ? 15 : 5}
+                  shadowColor={selectedTokenSet.has(token.id) ? '#E9BE59' : 'black'}
                   opacity={token.hidden ? 0.4 : 1} />
                 {token.hidden && (
                   <Path data="M9.88 9.88l-3.29-3.29m7.53 7.53l3.29 3.29M3 3l18 18M10.37 4.37a11 11 0 0 1 10.63 7.63 11 11 0 0 1-7.01 6.14m-3.99-.14A11 11 0 0 1 3 12a11 11 0 0 1 3.17-4.83m2.22 2.22a3 3 0 0 0 4.24 4.24"
@@ -297,6 +372,19 @@ export default function MapView({
                   fontStyle="bold" fontFamily="Inter" opacity={token.hidden ? 0.6 : 1} />
               </Group>
             ))}
+            {marquee && (
+              <Rect
+                x={Math.min(marquee.startX, marquee.endX)}
+                y={Math.min(marquee.startY, marquee.endY)}
+                width={Math.abs(marquee.endX - marquee.startX)}
+                height={Math.abs(marquee.endY - marquee.startY)}
+                fill="rgba(233,190,89,0.08)"
+                stroke="#E9BE59"
+                strokeWidth={1}
+                dash={[4, 4]}
+                listening={false}
+              />
+            )}
           </Layer>
         </Stage>
 
@@ -323,8 +411,8 @@ export default function MapView({
                   <span className="flex-1 text-left">Add/Move a Player</span><ChevronRight size={12} className="opacity-30" />
                 </button>
                 <button onClick={() => setContextMenu(prev => prev ? { ...prev, view: 'add-enemy' } : null)}
-                  className="flex items-center gap-3 px-4 py-2.5 text-xs hover:bg-[var(--btn-bg)] hover:text-white transition-colors group">
-                  <Skull size={14} className="text-[var(--accent)] group-hover:text-white" />
+                  className="flex items-center gap-3 px-4 py-2.5 text-xs hover:bg-red-500 hover:text-white transition-colors group">
+                  <Skull size={14} className="text-red-500 group-hover:text-white" />
                   <span className="flex-1 text-left">Add an Enemy</span><ChevronRight size={12} className="opacity-30" />
                 </button>
                 <button onClick={() => setContextMenu(prev => prev ? { ...prev, view: 'add-npc' } : null)}
@@ -342,12 +430,16 @@ export default function MapView({
                   <button onClick={() => setContextMenu(prev => prev ? { ...prev, view: 'root' } : null)} className="opacity-50 hover:opacity-100 text-[10px] uppercase font-bold tracking-tighter">Back</button>
                 </div>
                 <div className="flex justify-between mb-3 bg-black/20 p-1 rounded-lg">
-                  {(['treasure', 'quote', 'combat', 'info', 'trap'] as MapNoteType[]).map(type => (
-                    <button key={type} onClick={() => setNoteDraft(prev => ({ ...prev, type }))}
-                      className={cn('p-2 rounded-md transition-all', noteDraft.type === type ? 'bg-[var(--accent)] text-white scale-110 shadow-lg' : 'hover:bg-white/5 opacity-40 hover:opacity-100')}>
-                      <NoteIcon type={type} size={18} className={noteDraft.type === type ? 'text-white' : ''} />
-                    </button>
-                  ))}
+                  {(['treasure', 'quote', 'combat', 'info', 'trap'] as MapNoteType[]).map(type => {
+                    const activeBg: Record<MapNoteType, string> = { treasure: 'bg-[var(--accent)]', quote: 'bg-blue-400', combat: 'bg-[var(--accent)]', info: 'bg-emerald-400', trap: 'bg-red-500' }
+                    const isActive = noteDraft.type === type
+                    return (
+                      <button key={type} onClick={() => setNoteDraft(prev => ({ ...prev, type }))}
+                        className={cn('p-2 rounded-md transition-all', isActive ? `${activeBg[type]} scale-110 shadow-lg` : 'hover:bg-white/5 opacity-40 hover:opacity-100')}>
+                        <NoteIcon type={type} size={18} className={isActive ? 'text-white' : ''} />
+                      </button>
+                    )
+                  })}
                 </div>
                 <textarea autoFocus value={noteDraft.content} onChange={(e) => setNoteDraft(prev => ({ ...prev, content: e.target.value }))}
                   placeholder="Write note content..." className="w-full bg-black border border-[var(--line)] rounded-lg p-2 text-sm outline-none focus:border-[var(--accent)] transition-colors min-h-[80px] resize-none mb-3"
@@ -407,7 +499,7 @@ export default function MapView({
               <div className="flex flex-col h-[400px]">
                 <div className="p-3 border-b border-[var(--line)] bg-black/10 flex items-center justify-between shrink-0">
                   <div className="flex items-center gap-2">
-                    <Skull size={14} className="text-[var(--accent)]" />
+                    <Skull size={14} className="text-red-500" />
                     <p className="text-[10px] font-bold uppercase tracking-widest opacity-50">Bestiary</p>
                   </div>
                   <button onClick={() => setContextMenu(prev => prev ? { ...prev, view: 'root' } : null)} className="opacity-50 hover:opacity-100 text-[10px] uppercase font-bold tracking-tighter">Back</button>
@@ -422,7 +514,7 @@ export default function MapView({
                       </div>
                     </div>
                     <div className="flex-1 overflow-y-auto py-1">
-                      {BESTIARY.filter(m => m.name.toLowerCase().includes(monsterSearch.toLowerCase())).map(m => (
+                      {filteredBestiary.map(m => (
                         <button key={m.id} onClick={() => setSelectedMonster(m)}
                           className={cn('w-full text-left px-4 py-2.5 text-xs transition-colors flex items-center justify-between',
                             selectedMonster?.id === m.id ? 'bg-[var(--accent)] text-white' : 'hover:bg-white/5')}>
@@ -602,3 +694,5 @@ export default function MapView({
     </div>
   )
 }
+
+export default memo(MapView)

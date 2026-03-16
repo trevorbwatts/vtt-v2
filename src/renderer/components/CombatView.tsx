@@ -1,4 +1,4 @@
-import { useState, useMemo } from 'react'
+import { useState, useMemo, memo } from 'react'
 import type { Combatant, ClassDefinition } from '../types'
 import { cn } from '../types'
 import { Trash2, ChevronUp, ChevronDown, ChevronRight, Shield, Zap, Swords } from 'lucide-react'
@@ -16,7 +16,7 @@ interface CombatViewProps {
   onCollapse: () => void
 }
 
-export default function CombatView({ activeCombatants, onUpdate, onRemove, onClear, onBulkSet, onCollapse }: CombatViewProps) {
+function CombatView({ activeCombatants, onUpdate, onRemove, onClear, onBulkSet, onCollapse }: CombatViewProps) {
   const [activeCombatantId, setActiveCombatantId] = useState<string | null>(null)
 
   const sortedCombatants = useMemo(() => {
@@ -170,3 +170,5 @@ export default function CombatView({ activeCombatants, onUpdate, onRemove, onCle
     </div>
   )
 }
+
+export default memo(CombatView)

@@ -25,7 +25,9 @@
       "Bash(npx electron-vite:*)",
       "Bash(npx tsc:*)",
       "Bash(node -e \"const r = require\\(''./node_modules/react-konva/package.json''\\); console.log\\(''react-konva version:'', r.version\\); console.log\\(''peerDeps:'', JSON.stringify\\(r.peerDependencies\\)\\)\")",
-      "Bash(npm info:*)"
+      "Bash(npm info:*)",
+      "Bash(wc -l src/renderer/components/*.tsx src/renderer/hooks/*.ts)",
+      "Bash(du -sh C:/Users/trevo/OneDrive/Desktop/vtt-v2/out/*)"
     ]
   }
 }
